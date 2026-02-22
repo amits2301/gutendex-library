@@ -5,8 +5,8 @@ import { pipe, switchMap, tap, catchError } from 'rxjs';
 import { EMPTY } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { GutendexService } from '../../core/services/gutendex.service';
-import { Book, BooksResponse } from '../../core/models/book.models';
+import { GutendexService } from '../services/gutendex.service';
+import { Book, BooksResponse } from '../models/book.models';
 
 export interface LoadingState {
   loading: boolean;

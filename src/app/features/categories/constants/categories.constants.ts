@@ -1,4 +1,4 @@
-import { EN_LABELS } from '../i18n/en';
+import { EN_LABELS } from '../../../core/i18n/en';
 
 export type GenreKey = keyof typeof EN_LABELS.GENRES;
 

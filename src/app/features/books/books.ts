@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BooksStore } from './books.store';
-import { Book } from '../../core/models/book.models';
+import { BooksStore } from './store/books.store';
+import { Book } from './models/book.models';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { EN_LABELS } from '../../core/i18n/en';
