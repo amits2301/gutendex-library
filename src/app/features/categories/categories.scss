@@ -1,0 +1,98 @@
+$page-bg: #f8f7ff;
+$primary: #5e56e7;
+$grey-text: #333333;
+$card-shadow: 0 2px 5px rgba(211, 209, 238, 0.5);
+
+.page {
+  font-family: 'Montserrat', sans-serif;
+  background-color: $page-bg;
+}
+
+.hero {
+  background-image: url('/assets/icons/pattern.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  h1 {
+    font-size: 48px;
+    font-weight: 600;
+    color: $primary;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  p {
+    font-size: 16px;
+    color: $grey-text;
+    line-height: 1.6;
+  }
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.category-card {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 20px;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: $card-shadow;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+  }
+
+  .label {
+    flex: 1;
+    font-size: 20px;
+    color: $grey-text;
+  }
+
+  .arrow {
+    color: $primary;
+    font-size: 22px;
+  }
+}
+
+/* Responsive (Desktop from Page 9) */
+
+@media (min-width: 768px) {
+  .categories {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .category-card {
+    width: 48%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .categories,
+  .hero {
+    padding: 20px 200px;
+  }
+
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(2, 350px);
+    gap: 24px 48px;
+  }
+
+  .category-card {
+    width: 100%;
+  }
+}
