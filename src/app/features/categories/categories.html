@@ -1,16 +1,18 @@
 <div class="page">
   <div class="hero">
-    <h1>Gutenberg Project</h1>
+    <h1>{{ labels.APP.TITLE }}</h1>
     <p>
-      A social cataloging website that allows you to freely search its database of books,
-      annotations, and reviews.
+      {{ labels.APP.SUBTITLE }}
     </p>
   </div>
+
   <div class="categories">
-    @for (category of categories; track category.topic) {
+    @for (category of categories; track category.key) {
       <div class="category-card" (click)="navigate(category.topic)">
         <img [src]="category.icon" class="icon" />
-        <span class="label">{{ category.label }}</span>
+        <span class="label">
+          {{ labels.GENRES[category.key] }}
+        </span>
         <span class="arrow">→</span>
       </div>
     }

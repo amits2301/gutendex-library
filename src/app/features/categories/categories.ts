@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CATEGORIES } from '../../core/constants/categories';
+import { EN_LABELS } from '../../core/i18n/en';
 
 @Component({
   selector: 'app-categories',
@@ -9,6 +10,7 @@ import { CATEGORIES } from '../../core/constants/categories';
   styleUrl: './categories.scss',
 })
 export class Categories {
+  readonly labels = EN_LABELS;
   categories = CATEGORIES;
 
   private router = inject(Router);

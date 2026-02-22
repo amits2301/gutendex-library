@@ -1,15 +1,47 @@
+import { EN_LABELS } from '../i18n/en';
+
+export type GenreKey = keyof typeof EN_LABELS.GENRES;
+
 export interface Category {
-  label: string;
+  key: GenreKey;
   topic: string;
   icon: string;
 }
 
-export const CATEGORIES: Category[] = [
-  { label: 'FICTION', topic: 'fiction', icon: 'assets/icons/fiction.svg' },
-  { label: 'DRAMA', topic: 'drama', icon: 'assets/icons/drama.svg' },
-  { label: 'HUMOUR', topic: 'humour', icon: 'assets/icons/humour.svg' },
-  { label: 'POLITICS', topic: 'politics', icon: 'assets/icons/politics.svg' },
-  { label: 'PHILOSOPHY', topic: 'philosophy', icon: 'assets/icons/philosophy.svg' },
-  { label: 'HISTORY', topic: 'history', icon: 'assets/icons/history.svg' },
-  { label: 'ADVENTURE', topic: 'adventure', icon: 'assets/icons/adventure.svg' },
-];
+export const CATEGORIES: readonly Category[] = [
+  {
+    key: 'FICTION',
+    topic: 'fiction',
+    icon: 'assets/icons/fiction.svg',
+  },
+  {
+    key: 'DRAMA',
+    topic: 'drama',
+    icon: 'assets/icons/drama.svg',
+  },
+  {
+    key: 'HUMOR',
+    topic: 'humor',
+    icon: 'assets/icons/humour.svg',
+  },
+  {
+    key: 'POLITICS',
+    topic: 'politics',
+    icon: 'assets/icons/politics.svg',
+  },
+  {
+    key: 'PHILOSOPHY',
+    topic: 'philosophy',
+    icon: 'assets/icons/philosophy.svg',
+  },
+  {
+    key: 'HISTORY',
+    topic: 'history',
+    icon: 'assets/icons/history.svg',
+  },
+  {
+    key: 'ADVENTURE',
+    topic: 'adventure',
+    icon: 'assets/icons/adventure.svg',
+  },
+] as const;

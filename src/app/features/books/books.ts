@@ -1,10 +1,19 @@
-import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BooksStore } from './books.store';
 import { Book } from '../../core/models/book.models';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { EN_LABELS } from '../../core/i18n/en';
 
 @Component({
   selector: 'app-books',
@@ -17,11 +26,17 @@ export class Books implements OnInit, AfterViewInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   readonly store: BooksStore = inject(BooksStore);
+  readonly labels = EN_LABELS;
 
   searchControl = new FormControl('');
 
   @ViewChild('scrollTrigger', { static: false })
   scrollTrigger!: ElementRef<HTMLDivElement>;
+
+  readonly currentGenreKey = computed(() => {
+    const topic = this.store.topic();
+    return topic ? (topic.toUpperCase() as keyof typeof this.labels.GENRES) : null;
+  });
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {

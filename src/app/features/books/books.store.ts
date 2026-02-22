@@ -5,12 +5,8 @@ import { pipe, switchMap, tap, catchError } from 'rxjs';
 import { EMPTY } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { Gutendex } from '../../core/services/gutendex';
+import { GutendexService } from '../../core/services/gutendex.service';
 import { Book, BooksResponse } from '../../core/models/book.models';
-
-/* -------------------------------------
-   Loading State
-------------------------------------- */
 
 export interface LoadingState {
   loading: boolean;
@@ -21,10 +17,6 @@ const initialLoadingState: LoadingState = {
   loading: false,
   error: null,
 };
-
-/* -------------------------------------
-   Books State
-------------------------------------- */
 
 export interface BooksState {
   books: Book[];
@@ -42,17 +34,10 @@ const initialState: BooksState = {
   loadingState: initialLoadingState,
 };
 
-/* -------------------------------------
-   Store
-------------------------------------- */
-
 export const BooksStore = signalStore(
   withState(initialState),
 
-  withMethods((store, api = inject(Gutendex)) => ({
-    /* ------------------------------
-       Load Initial / Search
-    ------------------------------ */
+  withMethods((store, api = inject(GutendexService)) => ({
     loadBooks: rxMethod<{ topic: string; search?: string }>(
       pipe(
         tap(({ topic, search }) => {
@@ -89,10 +74,6 @@ export const BooksStore = signalStore(
         ),
       ),
     ),
-
-    /* ------------------------------
-       Load More (Pagination)
-    ------------------------------ */
     loadMore: rxMethod<void>(
       pipe(
         tap(() => {

@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class Gutendex {
+export class GutendexService {
   private baseUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}

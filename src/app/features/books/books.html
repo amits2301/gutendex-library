@@ -1,23 +1,40 @@
 <div class="books-page">
+
   <!-- Header -->
   <div class="header">
     <button class="back-btn" (click)="goBack()">←</button>
-    <h2 class="title">{{ store.topic() | titlecase }}</h2>
+
+    @if (currentGenreKey()) {
+      <h2 class="title">
+        {{ labels.GENRES[currentGenreKey()!] }}
+      </h2>
+    }
   </div>
 
   <!-- Search -->
   <div class="search-wrapper">
-    <input type="text" placeholder="Search" [formControl]="searchControl" />
+    <input
+      type="text"
+      [placeholder]="labels.SEARCH.PLACEHOLDER"
+      [formControl]="searchControl"
+    />
   </div>
 
-  <!-- Books Grid -->
-  @if (store.loadingState().loading) {
-    <div class="loader">Loading...</div>
+  <!-- Initial Loading -->
+  @if (store.loadingState().loading && store.books().length === 0) {
+    <div class="loader">
+      {{ labels.COMMON.LOADING }}
+    </div>
   }
+
+  <!-- Books Grid -->
   <div class="books-grid">
     @for (book of store.books(); track book.id) {
       <div class="book-card" (click)="openBook(book)">
-        <img [src]="book.formats['image/jpeg']" alt="{{ book.title }}" />
+        <img
+          [src]="book.formats['image/jpeg']"
+          [alt]="book.title"
+        />
 
         <div class="book-title">
           {{ book.title }}
@@ -29,9 +46,21 @@
       </div>
     }
   </div>
-  @if (store.loadingState().loading) {
-    <div class="bottom-loader">Loading more...</div>
+
+  <!-- No Results -->
+  @if (!store.loadingState().loading && store.books().length === 0) {
+    <div class="no-results">
+      {{ labels.COMMON.NO_RESULTS }}
+    </div>
   }
+
+  <!-- Pagination Loading -->
+  @if (store.loadingState().loading && store.books().length > 0) {
+    <div class="bottom-loader">
+      {{ labels.COMMON.LOADING_MORE }}
+    </div>
+  }
+
 </div>
 
 <div class="scroll-trigger" #scrollTrigger></div>
