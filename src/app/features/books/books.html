@@ -1,5 +1,4 @@
 <div class="books-page">
-
   <!-- Header -->
   <div class="header">
     <button class="back-btn" (click)="goBack()">←</button>
@@ -13,11 +12,20 @@
 
   <!-- Search -->
   <div class="search-wrapper">
-    <input
-      type="text"
-      [placeholder]="labels.SEARCH.PLACEHOLDER"
-      [formControl]="searchControl"
-    />
+    <div class="search-box">
+      <img src="assets/icons/search.svg" class="search-icon" alt="search" />
+
+      <input type="text" [placeholder]="labels.SEARCH.PLACEHOLDER" [formControl]="searchControl" />
+
+      @if (searchControl.value) {
+        <img
+          src="assets/icons/cancel.svg"
+          class="clear-icon"
+          alt="clear"
+          (click)="searchControl.setValue('')"
+        />
+      }
+    </div>
   </div>
 
   <!-- Initial Loading -->
@@ -31,10 +39,7 @@
   <div class="books-grid">
     @for (book of store.books(); track book.id) {
       <div class="book-card" (click)="openBook(book)">
-        <img
-          [src]="book.formats['image/jpeg']"
-          [alt]="book.title"
-        />
+        <img [src]="book.formats['image/jpeg']" [alt]="book.title" />
 
         <div class="book-title">
           {{ book.title }}
@@ -60,7 +65,6 @@
       {{ labels.COMMON.LOADING_MORE }}
     </div>
   }
-
 </div>
 
 <div class="scroll-trigger" #scrollTrigger></div>
