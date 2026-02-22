@@ -1,13 +1,6 @@
-$page-bg: #f8f7ff;
-$primary: #5e56e7;
-$grey-light: #f0f0f6;
-$grey-medium: #a0a0a0;
-$grey-dark: #333333;
-$card-shadow: 0 2px 5px rgba(211, 209, 238, 0.5);
-
 .books-page {
   min-height: 100vh;
-  background: $page-bg;
+  background: var(--color-page-bg);
   padding: 24px 16px 40px;
   font-family: 'Montserrat', sans-serif;
 }
@@ -25,15 +18,15 @@ $card-shadow: 0 2px 5px rgba(211, 209, 238, 0.5);
     background: none;
     border: none;
     font-size: 24px;
-    color: $primary;
+    color: var(--color-primary);
     cursor: pointer;
     margin-right: 8px;
   }
 
   .title {
-    font-size: 30px; // Heading 2 from styleguide
+    font-size: 30px;
     font-weight: 600;
-    color: $primary;
+    color: var(--color-primary);
   }
 }
 
@@ -46,17 +39,22 @@ $card-shadow: 0 2px 5px rgba(211, 209, 238, 0.5);
 
   input {
     width: 100%;
-    height: 40px; // styleguide
+    height: 40px;
     padding: 0 10px;
     border-radius: 4px;
     border: none;
-    background: $grey-light;
+    background: var(--color-surface-light);
     font-size: 16px;
     outline: none;
+    color: var(--color-text-dark);
+
+    &::placeholder {
+      color: var(--color-text-medium);
+    }
 
     &:focus {
-      border: 1px solid $primary;
-      background: white;
+      border: 1px solid var(--color-primary);
+      background: var(--color-surface);
     }
   }
 }
@@ -80,17 +78,17 @@ $card-shadow: 0 2px 5px rgba(211, 209, 238, 0.5);
 
   img {
     width: 100%;
-    height: 162px; // styleguide exact height
+    height: 162px;
     object-fit: cover;
     border-radius: 8px;
-    box-shadow: $card-shadow;
+    box-shadow: var(--shadow-card);
     margin-bottom: 8px;
   }
 
   .book-title {
-    font-size: 12px; // styleguide
+    font-size: 12px;
     font-weight: 600;
-    color: $grey-dark;
+    color: var(--color-text-dark);
     margin-bottom: 4px;
     text-transform: uppercase;
 
@@ -101,8 +99,8 @@ $card-shadow: 0 2px 5px rgba(211, 209, 238, 0.5);
   }
 
   .book-author {
-    font-size: 12px; // styleguide
-    color: $grey-medium;
+    font-size: 12px;
+    color: var(--color-text-medium);
   }
 }
 
@@ -144,5 +142,5 @@ $card-shadow: 0 2px 5px rgba(211, 209, 238, 0.5);
   text-align: center;
   padding: 20px;
   font-weight: 500;
-  color: #5e56e7;
+  color: var(--color-primary);
 }

@@ -1,28 +1,24 @@
-$page-bg: #f8f7ff;
-$primary: #5e56e7;
-$grey-text: #333333;
-$card-shadow: 0 2px 5px rgba(211, 209, 238, 0.5);
-
 .page {
   font-family: 'Montserrat', sans-serif;
-  background-color: $page-bg;
+  background-color: var(--color-page-bg);
 }
 
 .hero {
   background-image: url('/assets/icons/pattern.svg');
   background-repeat: no-repeat;
   background-size: cover;
+
   h1 {
     font-size: 48px;
     font-weight: 600;
-    color: $primary;
+    color: var(--color-primary);
     margin-bottom: 16px;
     line-height: 1.1;
   }
 
   p {
     font-size: 16px;
-    color: $grey-text;
+    color: var(--color-text-dark);
     line-height: 1.6;
   }
 }
@@ -38,9 +34,9 @@ $card-shadow: 0 2px 5px rgba(211, 209, 238, 0.5);
   align-items: center;
   height: 50px;
   padding: 0 20px;
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: 4px;
-  box-shadow: $card-shadow;
+  box-shadow: var(--shadow-card);
   cursor: pointer;
   transition: all 0.2s ease;
 
@@ -57,16 +53,14 @@ $card-shadow: 0 2px 5px rgba(211, 209, 238, 0.5);
   .label {
     flex: 1;
     font-size: 20px;
-    color: $grey-text;
+    color: var(--color-text-dark);
   }
 
   .arrow {
-    color: $primary;
+    color: var(--color-primary);
     font-size: 22px;
   }
 }
-
-/* Responsive (Desktop from Page 9) */
 
 @media (min-width: 768px) {
   .categories {
