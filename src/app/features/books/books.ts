@@ -7,7 +7,6 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { TitleCasePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BooksStore } from './store/books.store';
 import { Book } from './models/book.models';
@@ -18,7 +17,7 @@ import { getPreferredBookUrl } from './utils/book.utils';
 
 @Component({
   selector: 'app-books',
-  imports: [TitleCasePipe, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './books.html',
   styleUrl: './books.scss',
   providers: [BooksStore],
