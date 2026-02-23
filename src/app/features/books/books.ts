@@ -14,6 +14,7 @@ import { Book } from './models/book.models';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { EN_LABELS } from '../../core/i18n/en';
+import { getPreferredBookUrl } from './utils/book.utils';
 
 @Component({
   selector: 'app-books',
@@ -79,36 +80,13 @@ export class Books implements OnInit, AfterViewInit {
   goBack(): void {
     this.router.navigate(['/']);
   }
-
   openBook(book: Book): void {
-    const formats = book.formats;
+    const url = getPreferredBookUrl(book);
 
-    const html = this.getFormat(formats, 'text/html');
-    if (html) {
-      window.open(html, '_blank');
-      return;
+    if (url) {
+      window.open(url, '_blank');
+    } else {
+      alert(this.labels.COMMON.ERROR_NO_VIEWABLE);
     }
-
-    const pdf = this.getFormat(formats, 'application/pdf');
-    if (pdf) {
-      window.open(pdf, '_blank');
-      return;
-    }
-
-    const txt = this.getFormat(formats, 'text/plain');
-    if (txt) {
-      window.open(txt, '_blank');
-      return;
-    }
-
-    alert('No viewable version available');
-  }
-
-  private getFormat(formats: Record<string, string>, mime: string): string | null {
-    const entry = Object.entries(formats).find(
-      ([type]) => type.startsWith(mime) && !type.includes('zip'),
-    );
-
-    return entry ? entry[1] : null;
   }
 }

@@ -1,5 +1,4 @@
 <div class="books-page">
-  <!-- Header -->
   <div class="header">
     <button class="back-btn" (click)="goBack()">←</button>
 
@@ -10,7 +9,6 @@
     }
   </div>
 
-  <!-- Search -->
   <div class="search-wrapper">
     <div class="search-box">
       <img src="assets/icons/search.svg" class="search-icon" alt="search" />
@@ -28,14 +26,12 @@
     </div>
   </div>
 
-  <!-- Initial Loading -->
   @if (store.loadingState().loading && store.books().length === 0) {
     <div class="loader">
       {{ labels.COMMON.LOADING }}
     </div>
   }
 
-  <!-- Books Grid -->
   <div class="books-grid">
     @for (book of store.books(); track book.id) {
       <div class="book-card" (click)="openBook(book)">
@@ -52,14 +48,12 @@
     }
   </div>
 
-  <!-- No Results -->
   @if (!store.loadingState().loading && store.books().length === 0) {
     <div class="no-results">
       {{ labels.COMMON.NO_RESULTS }}
     </div>
   }
 
-  <!-- Pagination Loading -->
   @if (store.loadingState().loading && store.books().length > 0) {
     <div class="bottom-loader">
       {{ labels.COMMON.LOADING_MORE }}
