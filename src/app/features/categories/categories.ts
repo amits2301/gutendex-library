@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { CATEGORIES } from './constants/categories';
+import { CATEGORIES } from './constants/categories.constants';
 import { EN_LABELS } from '../../core/i18n/en';
 
 @Component({
