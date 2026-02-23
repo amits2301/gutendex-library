@@ -1,17 +1,21 @@
 import {
   AfterViewInit,
   Component,
-  computed,
+  DestroyRef,
   ElementRef,
+  ViewChild,
+  computed,
   inject,
   OnInit,
-  ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BooksStore } from './store/books.store';
-import { Book } from './models/book.models';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { BooksStore } from './store/books.store';
+import { Book } from './models/book.models';
 import { EN_LABELS } from '../../core/i18n/en';
 import { getPreferredBookUrl } from './utils/book.utils';
 
@@ -22,13 +26,16 @@ import { getPreferredBookUrl } from './utils/book.utils';
   styleUrl: './books.scss',
   providers: [BooksStore],
 })
-export class Books implements OnInit, AfterViewInit {
+export class Books implements OnInit, AfterViewInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
+
   readonly store: BooksStore = inject(BooksStore);
   readonly labels = EN_LABELS;
 
   searchControl = new FormControl('');
+  private observer!: IntersectionObserver;
 
   @ViewChild('scrollTrigger', { static: false })
   scrollTrigger!: ElementRef<HTMLDivElement>;
@@ -38,8 +45,8 @@ export class Books implements OnInit, AfterViewInit {
     return topic ? (topic.toUpperCase() as keyof typeof this.labels.GENRES) : null;
   });
 
-  ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
+  ngOnInit(): void {
+    this.route.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       const topic = params.get('topic');
       if (topic) {
         this.store.loadBooks({ topic });
@@ -47,7 +54,7 @@ export class Books implements OnInit, AfterViewInit {
     });
 
     this.searchControl.valueChanges
-      .pipe(debounceTime(400), distinctUntilChanged())
+      .pipe(debounceTime(400), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => {
         const topic = this.store.topic();
         if (topic) {
@@ -59,8 +66,8 @@ export class Books implements OnInit, AfterViewInit {
       });
   }
 
-  ngAfterViewInit() {
-    const observer = new IntersectionObserver(
+  ngAfterViewInit(): void {
+    this.observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !this.store.loadingState().loading && this.store.next()) {
           this.store.loadMore();
@@ -73,12 +80,17 @@ export class Books implements OnInit, AfterViewInit {
       },
     );
 
-    observer.observe(this.scrollTrigger.nativeElement);
+    this.observer.observe(this.scrollTrigger.nativeElement);
+  }
+
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
   }
 
   goBack(): void {
     this.router.navigate(['/']);
   }
+
   openBook(book: Book): void {
     const url = getPreferredBookUrl(book);
 
