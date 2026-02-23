@@ -74,19 +74,18 @@ export const BooksStore = signalStore(
         ),
       ),
     ),
+
     loadMore: rxMethod<void>(
       pipe(
-        tap(() => {
-          if (!store.next()) return;
+        switchMap(() => {
+          const nextUrl = store.next();
+          const isLoading = store.loadingState().loading;
+
+          if (!nextUrl || isLoading) return EMPTY;
 
           patchState(store, {
             loadingState: { loading: true, error: null },
           });
-        }),
-
-        switchMap(() => {
-          const nextUrl = store.next();
-          if (!nextUrl) return EMPTY;
 
           return api.getBooks('', '', nextUrl).pipe(
             tap((response: BooksResponse) => {
@@ -113,9 +112,12 @@ export const BooksStore = signalStore(
     ),
 
     clearError() {
-      patchState(store, {
-        loadingState: { ...store.loadingState(), error: null },
-      });
+      patchState(store, (state) => ({
+        loadingState: {
+          ...state.loadingState,
+          error: null,
+        },
+      }));
     },
   })),
 );
