@@ -55,8 +55,8 @@ body {
   --color-surface: #ffffff;
   --color-surface-light: #f0f0f6;
 
-  /* Shadows */
-  --shadow-card: 0 2px 5px rgba(211, 209, 238, 0.5);
+  /* Shadows - Styleguide: 0 2px 5px 0 rgba(211, 209, 238, 0.5) */
+  --shadow-card: 0 2px 5px 0 rgba(211, 209, 238, 0.5);
 }
 
 .dark-theme {

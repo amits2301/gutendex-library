@@ -1,13 +1,8 @@
 .books-page {
   min-height: 100vh;
-  background: var(--color-page-bg);
+  background-color: var(--color-page-bg);
   padding: 24px 16px 40px;
-  font-family: 'Montserrat', sans-serif;
 }
-
-/* =========================
-   HEADER
-========================= */
 
 .header {
   display: flex;
@@ -29,10 +24,6 @@
     color: var(--color-primary);
   }
 }
-
-/* =========================
-   SEARCH BOX
-========================= */
 
 .search-wrapper {
   margin-bottom: 24px;
@@ -90,19 +81,11 @@
   }
 }
 
-/* =========================
-   BOOK GRID
-========================= */
-
 .books-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px 16px;
 }
-
-/* =========================
-   BOOK CARD
-========================= */
 
 .book-card {
   cursor: pointer;
@@ -131,13 +114,10 @@
 
   .book-author {
     font-size: 12px;
+    font-weight: 400;
     color: var(--color-text-medium);
   }
 }
-
-/* =========================
-   TABLET
-========================= */
 
 @media (min-width: 768px) {
   .books-grid {
@@ -145,10 +125,6 @@
     gap: 32px 24px;
   }
 }
-
-/* =========================
-   DESKTOP
-========================= */
 
 @media (min-width: 1024px) {
   .books-page {

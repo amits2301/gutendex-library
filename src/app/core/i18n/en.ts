@@ -1,6 +1,6 @@
 export const EN_LABELS = {
   APP: {
-    TITLE: 'Gutenberg Library',
+    TITLE: 'Gutenberg Project',
     SUBTITLE:
       'A social cataloging website that allows you to freely search its database of books, annotations, and reviews.',
   },
